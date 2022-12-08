@@ -141,7 +141,7 @@ struct TopLevelView: View {
       .parentalAlert(isShowing: $showParentAlert, proceedToNext: $shouldGotoTodos, title: "Parents -", bodyMessage: "Provide answer:", primaryLabel: "Submit")
       .onChange(of: viewStore.spokeCorrectly) { correct in
         if correct {
-          self.impactReward()
+          self.impactRewardPattern()
           AudioServicesPlaySystemSoundWithCompletion(1166, nil)
         }
         withAnimation(.easeInOut(duration: 0.3)) {
@@ -204,7 +204,7 @@ struct TopLevelView: View {
         .frame(width: 300, height: 250)
         .cornerRadius(20)
       
-      Text(viewStore.currentWord?.description == nil ? "???" : "\(viewStore.currentWord?.description ?? "")")
+      Text(viewStore.currentWord?.description == nil ? "Parents - Add some words from the Todo menu" : "\(viewStore.currentWord?.description ?? "")")
         .font(.largeTitle.bold())
         .padding()
         .frame(width: 300, height: 250)
@@ -243,6 +243,7 @@ struct TopLevelView: View {
   var nextWordButton: some View {
       HStack {
         Spacer()
+        Text("(Next)").foregroundColor(.gray)
         Button(
           action: {
             viewStore.send(.getNextWord)
@@ -251,9 +252,9 @@ struct TopLevelView: View {
           label: {
             Image(systemName: "arrow.right.square")
               .resizable()
-              .frame(width: 50, height: 40)
+              .frame(width: 45, height: 40)
           }
-        )
+        ).disabled(viewStore.todoState.todos.isEmpty)
       }
       .padding()
   }
@@ -264,22 +265,26 @@ struct TopLevelView: View {
       .transition(.asymmetric(insertion: AnyTransition.opacity.combined(with: .slide), removal: .scale))
   }
   
-  func impactReward() {
+  func impactRewardPattern() {
     impact(style: .rigid)
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-      impact(style: .rigid)
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-        impact(style: .rigid)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-          impact(style: .rigid)
-          DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            impact(style: .rigid)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-              impact(style: .rigid)
-            }
-          }
-        }
+    Task {
+      await impactAfter(seconds: 0.15)
+      await impactAfter(seconds: 0.15)
+      await impactAfter(seconds: 0.1)
+      await impactAfter(seconds: 0.1)
+      await impactAfter(seconds: 0.1)
+    }
+  }
+  
+  func impactAfter(seconds: Double) async {
+    do {
+      let nano = seconds * 1_000_000_000
+      try await Task.sleep(nanoseconds: UInt64(nano))
+      await MainActor.run {
+        self.impact(style: .rigid)
       }
+    } catch {
+      debugPrint("Task.sleep never throws!")
     }
   }
   
