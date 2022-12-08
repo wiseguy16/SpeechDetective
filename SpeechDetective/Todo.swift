@@ -183,116 +183,11 @@ enum Filer {
     return []
   }
 }
-
-
-
-//struct AppEnvironment {
-//  var mainQueue: AnySchedulerOf<DispatchQueue>
-//  var uuid: @Sendable () -> UUID
-//}
-  
-/*
-
-let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
-  todoReducer.forEach(
-    state: \.todos,
-    action: /AppAction.todo(id:action:),
-    environment: { _ in TodoEnvironment() }
-  ),
-  Reducer { state, action, environment in
-    switch action {
-    case .addTodoButtonTapped:
-      state.todos.insert(TodoState(id: environment.uuid()), at: 0)
-      return .none
-      
-    case .clearCompletedButtonTapped:
-      state.todos.removeAll(where: \.isComplete)
-      return .none
-      
-    case let .delete(indexSet):
-      state.todos.remove(atOffsets: indexSet)
-      return .none
-      
-    case let .editModeChanged(editMode):
-      state.editMode = editMode
-      return .none
-      
-    case let .filterPicked(filter):
-      state.filter = filter
-      return .none
-      
-    case var .move(source, destination):
-      if state.filter == .completed {
-        source = IndexSet(
-          source
-            .map { state.filteredTodos[$0] }
-            .compactMap { state.todos.index(id: $0.id) }
-        )
-        destination =
-        (destination < state.filteredTodos.endIndex
-         ? state.todos.index(id: state.filteredTodos[destination].id)
-         : state.todos.endIndex)
-        ?? destination
-      }
-      
-      state.todos.move(fromOffsets: source, toOffset: destination)
-      
-      return .task {
-        try await environment.mainQueue.sleep(for: .milliseconds(100))
-        return .sortCompletedTodos
-      }
-      
-    case .sortCompletedTodos:
-      state.todos.sort { $1.isComplete && !$0.isComplete }
-      return .none
-      
-    case .todo(id: _, action: .checkBoxToggled):
-      enum TodoCompletionID {}
-      return .task {
-        try await environment.mainQueue.sleep(for: .seconds(1))
-        return .sortCompletedTodos
-      }
-      .animation()
-      .cancellable(id: TodoCompletionID.self, cancelInFlight: true)
-      
-    case .todo:
-      return .none
-    case .getAll:
-      let allTodos = Filer.getSavedTodos()
-      state.todos.append(contentsOf: allTodos)
-      return .none
-    case .saveAll:
-      let currentTodos = state.todos.elements
-      Filer.saveTodos(currentTodos)
-      return .none
-    }
-  }
-)
-
-*/
   
   
 
 struct TodoAppView: View {
   let store: StoreOf<TodoApp>
-//  @ObservedObject var viewStore: ViewStore<ViewState, TodoApp.Action>
-
-//  init(store: Store<TodoApp.State, TodoApp.Action>) {
-//    self.store = store
-//    self.viewStore = ViewStore(self.store.scope(state: ViewState.init(state:)))
-//  }
-//
-//  struct ViewState: Equatable {
-//    let editMode: EditMode
-//    let filter: Filter
-//    let isClearCompletedButtonDisabled: Bool
-//
-//    init(state: TodoApp.State) {
-//      self.editMode = state.editMode
-//      self.filter = state.filter
-//      self.isClearCompletedButtonDisabled = !state.todos.contains(where: \.isComplete)
-//    }
-//  }
   
   var body: some View {
     WithViewStore(self.store) { viewStore in

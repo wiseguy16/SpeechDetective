@@ -112,7 +112,6 @@ struct TopLevelView: View {
   let empty = { EmptyView() }
 
   var body: some View {
-    //NavigationStack(path: $path) {
     NavigationView {
       VStack {
         // NavigationLink(value: todoDestination, label: empty)
@@ -137,17 +136,13 @@ struct TopLevelView: View {
         }
         
       }
-      .navigationTitle("Say Something")
+      .navigationTitle("Speech Detective")
       .navigationBarTitleDisplayMode(.inline)
       .parentalAlert(isShowing: $showParentAlert, proceedToNext: $shouldGotoTodos, title: "Parents -", bodyMessage: "Provide answer:", primaryLabel: "Submit")
       .onChange(of: viewStore.spokeCorrectly) { correct in
         if correct {
           self.impactReward()
-          //              let s: SystemSoundID = 1109
-          //              AudioServicesPlaySystemSoundWithCompletion(s, nil)
-          
-                        AudioServicesPlaySystemSoundWithCompletion(1166, nil)
-          
+          AudioServicesPlaySystemSoundWithCompletion(1166, nil)
         }
         withAnimation(.easeInOut(duration: 0.3)) {
           self.showListening = false
@@ -188,9 +183,7 @@ struct TopLevelView: View {
         Button(
           action: {
             showParentAlert.toggle()
-           // shouldGotoTodos.toggle()
             impact(style: .rigid)
-           // path.append(todoDestination)
           },
           label: {
             Image(systemName: "list.bullet.rectangle")
@@ -226,10 +219,6 @@ struct TopLevelView: View {
       action: {
         viewStore.send(.evaluateSpeech)
         impact(style: .rigid)
-       
-//          let s: SystemSoundID = 1160
-//          AudioServicesPlaySystemSoundWithCompletion(s, nil)
-        
         withAnimation(.easeInOut(duration: 0.5)) {
           self.showListening = true
         }
@@ -258,7 +247,6 @@ struct TopLevelView: View {
           action: {
             viewStore.send(.getNextWord)
             impact(style: .light)
-//            AudioServicesPlaySystemSoundWithCompletion(1166, nil)
           },
           label: {
             Image(systemName: "arrow.right.square")
@@ -300,22 +288,6 @@ struct TopLevelView: View {
     imp.impactOccurred()
   }
   
-  var soundPlay: some View {
-    HStack {
-      Button(
-        action: {
-//          AudioServicesPlaySystemSoundWithCompletion(sound, nil)
-//          print("Sound is \(sound)")
-//          sound += 1
-        },
-        label: {
-          Text("soundPlay")
-            .font(.largeTitle)
-        }
-      )
-    }
-    .padding(.horizontal)
-    .padding(.bottom, 40)
-  }
+
   
 }
