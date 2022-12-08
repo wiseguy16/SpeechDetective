@@ -165,7 +165,6 @@ struct TodoApp: ReducerProtocol {
     }
   }
 }
-
   
 enum Filer {
   static func saveTodos(_ todos: [Todo.State]) {
@@ -183,8 +182,6 @@ enum Filer {
     return []
   }
 }
-  
-  
 
 struct TodoAppView: View {
   let store: StoreOf<TodoApp>

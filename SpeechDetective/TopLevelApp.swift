@@ -293,6 +293,4 @@ struct TopLevelView: View {
     imp.impactOccurred()
   }
   
-
-  
 }
