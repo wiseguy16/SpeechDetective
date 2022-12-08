@@ -6,12 +6,22 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 @main
 struct SpeechDetectiveApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+          TopLevelView(
+            store:
+              Store(
+                initialState:
+                  TopLevel.State(todoState: TodoApp.State(),
+                                 speechState: SpeechApp.State()
+                ),
+                reducer: TopLevel()
+              )
+          )
         }
     }
 }
