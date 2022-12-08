@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4A52242E294236F100FCEE6F /* SpeechDetectiveApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A52242D294236F100FCEE6F /* SpeechDetectiveApp.swift */; };
-		4A522430294236F100FCEE6F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A52242F294236F100FCEE6F /* ContentView.swift */; };
 		4A522432294236F600FCEE6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A522431294236F600FCEE6F /* Assets.xcassets */; };
 		4A522435294236F600FCEE6F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A522434294236F600FCEE6F /* Preview Assets.xcassets */; };
 		4AC59C5829423A6800D44F7B /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 4AC59C5729423A6800D44F7B /* ComposableArchitecture */; };
@@ -24,7 +23,6 @@
 /* Begin PBXFileReference section */
 		4A52242A294236F100FCEE6F /* SpeechDetective.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeechDetective.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A52242D294236F100FCEE6F /* SpeechDetectiveApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechDetectiveApp.swift; sourceTree = "<group>"; };
-		4A52242F294236F100FCEE6F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4A522431294236F600FCEE6F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A522434294236F600FCEE6F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4AC59C5D29423AE600D44F7B /* ParentAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentAlertView.swift; sourceTree = "<group>"; };
@@ -74,7 +72,6 @@
 				4AC59C6529423B0D00D44F7B /* Todo.swift */,
 				4AC59C5D29423AE600D44F7B /* ParentAlertView.swift */,
 				4AC59C6729423C4100D44F7B /* ButtonStyler.swift */,
-				4A52242F294236F100FCEE6F /* ContentView.swift */,
 				4A522431294236F600FCEE6F /* Assets.xcassets */,
 				4A522433294236F600FCEE6F /* Preview Content */,
 			);
@@ -166,7 +163,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A522430294236F100FCEE6F /* ContentView.swift in Sources */,
 				4AC59C5E29423AE600D44F7B /* ParentAlertView.swift in Sources */,
 				4AC59C6229423AFB00D44F7B /* SpeechClient.swift in Sources */,
 				4AC59C6629423B0D00D44F7B /* Todo.swift in Sources */,
